@@ -216,6 +216,7 @@ export type ProjectCredentials = {
 };
 
 export type FormInputs = {
+  hypercertId?: string;
   title?: string;
   description?: string;
   website?: string;
@@ -234,6 +235,7 @@ export enum ProjectFormStatus {
   Metadata,
   Verification,
   Preview,
+  HypercertMetadata,
 }
 
 export type DynamicFormInputs = {
