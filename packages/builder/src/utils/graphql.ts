@@ -15,6 +15,10 @@ const hypercertsGraphQlEndpoints: Record<ChainId, string> = {
     process.env.REACT_APP_HYPERCERTS_SUBGRAPH_URL_OPTIMISM_MAINNET!,
   [ChainId.PGN]:
     process.env.REACT_APP_HYPERCERTS_SUBGRAPH_URL_OPTIMISM_MAINNET!,
+  [ChainId.ARBITRUM]:
+    process.env.REACT_APP_HYPERCERTS_SUBGRAPH_URL_OPTIMISM_MAINNET!,
+  [ChainId.ARBITRUM_GOERLI]:
+    process.env.REACT_APP_HYPERCERTS_SUBGRAPH_URL_OPTIMISM_MAINNET!,
 };
 
 /**
