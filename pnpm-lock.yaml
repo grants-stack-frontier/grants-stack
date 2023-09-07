@@ -70,8 +70,8 @@ importers:
         specifier: ^2.0.11
         version: 2.0.13(react@18.2.0)
       '@hypercerts-org/sdk':
-        specifier: ^0.3.1
-        version: 0.3.1(@babel/core@7.22.10)(@envelop/core@3.0.6)(@ethersproject/abi@5.7.0)(@ethersproject/bytes@5.7.0)(@ethersproject/providers@5.7.2)(@graphql-mesh/cross-helpers@0.3.4)(@graphql-mesh/store@0.93.1)(@graphql-mesh/types@0.93.2)(@graphql-mesh/utils@0.93.2)(@graphql-tools/delegate@9.0.35)(@graphql-tools/merge@8.4.2)(@graphql-tools/utils@9.2.1)(@graphql-tools/wrap@9.4.2)(@types/node@18.17.6)(esbuild@0.19.2)(graphql-tag@2.12.6)(mocha@10.2.0)(react-native@0.72.4)(ts-node@10.9.1)(typescript@4.9.5)(uint8arraylist@2.4.3)
+        specifier: ^0.5.0
+        version: 0.5.0(@babel/core@7.22.10)(@envelop/core@3.0.6)(@ethersproject/abi@5.7.0)(@ethersproject/bytes@5.7.0)(@ethersproject/providers@5.7.2)(@graphql-mesh/cross-helpers@0.3.4)(@graphql-mesh/store@0.93.1)(@graphql-mesh/types@0.93.2)(@graphql-mesh/utils@0.93.2)(@graphql-tools/delegate@9.0.35)(@graphql-tools/merge@8.4.2)(@graphql-tools/utils@9.2.1)(@graphql-tools/wrap@9.4.2)(@types/node@18.17.6)(esbuild@0.19.2)(graphql-tag@2.12.6)(mocha@10.2.0)(react-native@0.72.4)(ts-node@10.9.1)(typescript@4.9.5)(uint8arraylist@2.4.3)
       '@lagunovsky/redux-react-router':
         specifier: ^2.2.0
         version: 2.3.0(history@5.3.0)(react-dom@18.2.0)(react-redux@7.2.9)(react-router@6.11.1)(react@18.2.0)(redux@4.2.1)
@@ -6651,17 +6651,17 @@ packages:
     resolution: {integrity: sha512-dvuCeX5fC9dXgJn9t+X5atfmgQAzUOWqS1254Gh0m6i8wKd10ebXkfNKiRK+1GWi/yTvvLDHpoxLr0xxxeslWw==}
     dev: false
 
-  /@hypercerts-org/contracts@0.0.13:
-    resolution: {integrity: sha512-hTyZGdfz9VsG7Ryy+IT2X5QlLDZEdMArjt2sCXjYq8/M1SHMK97THMfE/1Bsyq/fWZoeNATbxcOwMHdwuBOifw==}
+  /@hypercerts-org/contracts@0.2.0:
+    resolution: {integrity: sha512-6pjqfLNy1lH91EFF1y/oUTwI2JrJBTAIz1Bkd9raAu781J8rFaIHpx7p8DIuKgGp3JGeRb8mbbe5YKFsl2dt0A==}
     dev: false
 
-  /@hypercerts-org/sdk@0.3.1(@babel/core@7.22.10)(@envelop/core@3.0.6)(@ethersproject/abi@5.7.0)(@ethersproject/bytes@5.7.0)(@ethersproject/providers@5.7.2)(@graphql-mesh/cross-helpers@0.3.4)(@graphql-mesh/store@0.93.1)(@graphql-mesh/types@0.93.2)(@graphql-mesh/utils@0.93.2)(@graphql-tools/delegate@9.0.35)(@graphql-tools/merge@8.4.2)(@graphql-tools/utils@9.2.1)(@graphql-tools/wrap@9.4.2)(@types/node@18.17.6)(esbuild@0.19.2)(graphql-tag@2.12.6)(mocha@10.2.0)(react-native@0.72.4)(ts-node@10.9.1)(typescript@4.9.5)(uint8arraylist@2.4.3):
-    resolution: {integrity: sha512-PtAZomlgOT8EAMFh2UEyTXCOSWYWJsy+fOzJDFyy5V4QN/zHvefH92tDsEC6C3cxivlHYNAztLlJSelLHZHKvQ==}
+  /@hypercerts-org/sdk@0.5.0(@babel/core@7.22.10)(@envelop/core@3.0.6)(@ethersproject/abi@5.7.0)(@ethersproject/bytes@5.7.0)(@ethersproject/providers@5.7.2)(@graphql-mesh/cross-helpers@0.3.4)(@graphql-mesh/store@0.93.1)(@graphql-mesh/types@0.93.2)(@graphql-mesh/utils@0.93.2)(@graphql-tools/delegate@9.0.35)(@graphql-tools/merge@8.4.2)(@graphql-tools/utils@9.2.1)(@graphql-tools/wrap@9.4.2)(@types/node@18.17.6)(esbuild@0.19.2)(graphql-tag@2.12.6)(mocha@10.2.0)(react-native@0.72.4)(ts-node@10.9.1)(typescript@4.9.5)(uint8arraylist@2.4.3):
+    resolution: {integrity: sha512-Mnn/eUjVl/cDlk8rwNEHTHiaPZnA4J6vD9ClEHumchlgQ/6MR8TJ+5hxCdtjbWn1sudOUHxqLSbSt2oDoyDeLg==}
     dependencies:
       '@ethereum-attestation-service/eas-sdk': 0.28.3(@ethersproject/abi@5.7.0)(@ethersproject/bytes@5.7.0)(@ethersproject/providers@5.7.2)(ts-node@10.9.1)(typescript@4.9.5)
       '@graphprotocol/client-add-source-name': 1.0.20(@graphql-mesh/types@0.93.2)(@graphql-tools/delegate@9.0.35)(@graphql-tools/utils@9.2.1)(@graphql-tools/wrap@9.4.2)(graphql@16.6.0)
       '@graphprotocol/client-cli': 2.2.22(@babel/core@7.22.10)(@envelop/core@3.0.6)(@graphql-mesh/cross-helpers@0.3.4)(@graphql-mesh/store@0.93.1)(@graphql-mesh/types@0.93.2)(@graphql-mesh/utils@0.93.2)(@graphql-tools/delegate@9.0.35)(@graphql-tools/merge@8.4.2)(@graphql-tools/utils@9.2.1)(@graphql-tools/wrap@9.4.2)(@types/node@18.17.6)(graphql-tag@2.12.6)(graphql@16.6.0)(react-native@0.72.4)
-      '@hypercerts-org/contracts': 0.0.13
+      '@hypercerts-org/contracts': 0.2.0
       '@openzeppelin/merkle-tree': 1.0.5
       '@types/jest': 29.5.4
       ajv: 8.12.0
