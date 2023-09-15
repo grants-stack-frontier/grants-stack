@@ -161,6 +161,7 @@ export type Project = {
   grantApplicationFormAnswers: GrantApplicationFormAnswer[];
   status: ApplicationStatus;
   applicationIndex: number;
+  hypercertId?: string;
 };
 
 export type CartProject = Project & {
@@ -192,6 +193,7 @@ export type ProjectMetadata = {
   credentials?: ProjectCredentials;
   owners: ProjectOwner[];
   createdAt?: number;
+  hypercertId?: string;
 };
 
 export type ProjectCredentials = {
