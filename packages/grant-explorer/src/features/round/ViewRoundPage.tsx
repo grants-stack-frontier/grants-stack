@@ -518,7 +518,9 @@ function PreRoundPage(props: {
 }) {
   const { round, chainId, roundId, element } = props;
 
-  const applicationURL = `https://builder.gitcoin.co/#/chains/${chainId}/rounds/${roundId}`;
+  const applicationURL = `${
+    process.env.REACT_APP_BUILDER_APP_BASE_URL || "https://builder.gitcoin.co"
+  }/#/chains/${chainId}/rounds/${roundId}`;
   const currentTime = new Date();
 
   const isBeforeApplicationStartDate =
