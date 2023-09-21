@@ -169,7 +169,7 @@ export async function getRoundById(
 
 export const fetchHypercertMetadata = async (hypercertId: string) =>
   fetch(
-    "https://api.thegraph.com/subgraphs/name/hypercerts-admin/hypercerts-testnet",
+    "https://api.thegraph.com/subgraphs/name/hypercerts-admin/hypercerts-optimism-mainnet",
     {
       method: "POST",
       body: JSON.stringify({
