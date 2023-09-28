@@ -17,8 +17,8 @@ import PinataClient from "../../services/pinata";
 
 export const fetchHypercertMetadata = async (hypercertId: string) =>
   fetch(
-    "https://api.thegraph.com/subgraphs/name/hypercerts-admin/hypercerts-optimism-mainnet",
-    // "https://api.thegraph.com/subgraphs/name/hypercerts-admin/hypercerts-testnet",
+    // "https://api.thegraph.com/subgraphs/name/hypercerts-admin/hypercerts-optimism-mainnet",
+    "https://api.thegraph.com/subgraphs/name/hypercerts-admin/hypercerts-testnet",
     {
       method: "POST",
       body: JSON.stringify({
