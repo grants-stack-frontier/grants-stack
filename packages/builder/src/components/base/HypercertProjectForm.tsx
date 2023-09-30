@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import { useNetwork } from "wagmi";
+import { fetchHypercertMetadata } from "common/src/hypercert";
 import { ValidationError } from "yup";
 import { metadataImageSaved, metadataSaved } from "../../actions/projectForm";
 import { RootState } from "../../reducers";
@@ -14,34 +15,6 @@ import { validateProjectForm } from "./formValidation";
 import FormValidationErrorList from "./FormValidationErrorList";
 import ImageInput from "./ImageInput";
 import PinataClient from "../../services/pinata";
-
-export const fetchHypercertMetadata = async (hypercertId: string) =>
-  fetch(
-    // "https://api.thegraph.com/subgraphs/name/hypercerts-admin/hypercerts-optimism-mainnet",
-    "https://api.thegraph.com/subgraphs/name/hypercerts-admin/hypercerts-testnet",
-    {
-      method: "POST",
-      body: JSON.stringify({
-        variables: {
-          id: hypercertId,
-        },
-        query: `
-query ClaimById($id: ID!) {
-  claim(id: $id) {
-    contract
-    tokenID
-    creator
-    id
-    owner
-    totalUnits
-    uri
-  }
-}`,
-      }),
-    }
-  )
-    .then((res) => res.json())
-    .then((res) => res?.data?.claim);
 
 const validation = {
   messages: [""],
@@ -165,7 +138,10 @@ function HypercertProjectForm({
       throw new Error("Hypercert ID is required");
     }
 
-    const hypercert = await fetchHypercertMetadata(hypercertId);
+    const hypercert = await fetchHypercertMetadata(
+      hypercertId,
+      props.currentChain as unknown as number
+    );
 
     if (!hypercert) {
       throw new Error("Hypercert not found");
