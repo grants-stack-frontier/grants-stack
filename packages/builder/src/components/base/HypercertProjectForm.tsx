@@ -185,7 +185,7 @@ function HypercertProjectForm({
       hypercertMetadata.external_url.startsWith("ipfs://")
         ? hypercertMetadata.external_url.replace(
             "ipfs://",
-            "https://ipfs.io/ipfs/"
+            "https://nftstorage.link/ipfs/"
           )
         : hypercertMetadata.external_url;
 
