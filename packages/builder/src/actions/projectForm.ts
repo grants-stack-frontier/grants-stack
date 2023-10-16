@@ -45,6 +45,7 @@ export const metadataSaved = ({
   logoImg,
   bannerImg,
   hypercertId,
+  ipfsEvaluationUrl,
 }: FormInputs): ProjectFormActions => ({
   type: METADATA_SAVED,
   metadata: {
@@ -57,6 +58,7 @@ export const metadataSaved = ({
     logoImg,
     bannerImg,
     hypercertId,
+    ipfsEvaluationUrl,
   },
 });
 

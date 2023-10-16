@@ -283,6 +283,69 @@ export function WebsiteInput({
   );
 }
 
+export function IpfsInput({
+  label,
+  name,
+  value = "",
+  disabled,
+  info,
+  placeholder,
+  changeHandler,
+  required,
+  encrypted,
+  feedback,
+}: InputProps) {
+  const styleInfo = getStyleInfoForFeedback(feedback);
+  const { borderClass, feedbackColor } = styleInfo;
+
+  const removeWhiteSpace = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const validatedEvent = event;
+    validatedEvent.target.value = `ipfs://${event.target.value.trim()}`;
+
+    changeHandler(event);
+  };
+
+  const sanitizedInput = (value as string).replace(/(^\w+:|^)\/\//, "");
+
+  return (
+    <div className="mt-6 w-full sm:max-w-md relative">
+      <div className=" flex">
+        <div className="grow">
+          <label className="text-sm w-full" htmlFor={name}>
+            {label}
+          </label>
+        </div>
+        <div className={classNames("shrink ml-2", { "mr-2": encrypted })}>
+          {required ? requiredSpan : optionalSpan}
+        </div>
+        {encrypted && encryptionTooltip}
+      </div>
+      <legend>{info}</legend>
+      <div className="flex">
+        <span className="inline-flex items-center px-3 rounded-l-md border border-r-0 border-gray-300 bg-gray-50 text-gray-500 text-sm">
+          {" "}
+          ipfs://{" "}
+        </span>
+        <input
+          type="text"
+          id={name}
+          name={name}
+          value={sanitizedInput ?? ""}
+          placeholder={placeholder}
+          disabled={disabled}
+          onChange={removeWhiteSpace}
+          className={borderClass}
+        />
+      </div>
+      {feedback?.message ? (
+        <span className={`text-sm text-${feedbackColor}`}>
+          {feedback.message}
+        </span>
+      ) : null}
+    </div>
+  );
+}
+
 export function TextArea({
   label,
   info,

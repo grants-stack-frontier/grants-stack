@@ -8,7 +8,13 @@ import { ValidationError } from "yup";
 import { metadataImageSaved, metadataSaved } from "../../actions/projectForm";
 import { RootState } from "../../reducers";
 import { ChangeHandlers, ProjectFormStatus } from "../../types";
-import { Select, TextArea, TextInput, WebsiteInput } from "../grants/inputs";
+import {
+  IpfsInput,
+  Select,
+  TextArea,
+  TextInput,
+  WebsiteInput,
+} from "../grants/inputs";
 import Button, { ButtonVariants } from "./Button";
 import ExitModal from "./ExitModal";
 import { validateProjectForm } from "./formValidation";
@@ -174,13 +180,29 @@ function HypercertProjectForm({
     setLogoImg(blob);
     dispatch(metadataImageSaved(blob, "logoImgData"));
 
+    const website =
+      hypercertMetadata.external_url &&
+      hypercertMetadata.external_url.startsWith("ipfs://")
+        ? hypercertMetadata.external_url.replace(
+            "ipfs://",
+            "https://ipfs.io/ipfs/"
+          )
+        : hypercertMetadata.external_url;
+
+    const ipfsEvaluationUrl = hypercertMetadata.external_url?.startsWith(
+      "ipfs://"
+    )
+      ? (hypercertMetadata.external_url as string)
+      : "";
+
     dispatch(
       metadataSaved({
         ...props.formMetaData,
         hypercertId: hypercertId as string,
         title: hypercertMetadata.name as string,
         description: hypercertMetadata.description as string,
-        website: hypercertMetadata.external_url as string,
+        ipfsEvaluationUrl: ipfsEvaluationUrl as string,
+        website: website as string,
         logoImgData: blob,
       })
     );
@@ -226,6 +248,7 @@ function HypercertProjectForm({
           value={props.formMetaData.hypercertId}
           changeHandler={handleInput}
           required
+          disabled
           feedback={
             feedback.find((fb) => fb.title === "hypercertId") ?? {
               type: "none",
@@ -233,16 +256,7 @@ function HypercertProjectForm({
             }
           }
         />
-        <Button
-          onClick={() =>
-            props.formMetaData.hypercertId
-              ? handleFetchHypercert(props.formMetaData.hypercertId)
-              : {}
-          }
-          variant={ButtonVariants.outline}
-        >
-          Fetch
-        </Button>
+
         <div className="border w-full mt-8" />
         <TextInput
           label="Project Name"
@@ -250,7 +264,6 @@ function HypercertProjectForm({
           placeholder="What's the project name?"
           value={props.formMetaData.title}
           changeHandler={handleInput}
-          disabled
           required
           feedback={
             feedback.find((fb) => fb.title === "title") ?? {
@@ -265,10 +278,25 @@ function HypercertProjectForm({
           placeholder="Your project's website"
           value={props.formMetaData.website}
           changeHandler={handleInput}
-          disabled
           required
           feedback={
             feedback.find((fb) => fb.title === "website") ?? {
+              type: "none",
+              message: "",
+            }
+          }
+        />
+
+        <IpfsInput
+          label="IPFS Evaluation File"
+          name="ipfsEvaluationUrl"
+          placeholder="IPFS Evaluation File"
+          value={props.formMetaData.ipfsEvaluationUrl}
+          changeHandler={handleInput}
+          required={false}
+          disabled
+          feedback={
+            feedback.find((fb) => fb.title === "ipfsEvaluationUrl") ?? {
               type: "none",
               message: "",
             }
@@ -306,7 +334,6 @@ function HypercertProjectForm({
           changeHandler={handleInput}
           required
           rows={15}
-          disabled
           containerClass="sm:w-full"
           feedback={
             feedback.find((fb) => fb.title === "description") ?? {
