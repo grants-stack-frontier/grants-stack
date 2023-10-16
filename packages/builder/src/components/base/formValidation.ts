@@ -15,6 +15,7 @@ export async function validateProjectForm(inputs: FormInputs) {
     website: string()
       .url("Project Website must be a valid url. e.g. https://gitcoin.co/")
       .required("Project Website is required"),
+    ipfsEvaluationUrl: string().optional(),
   });
 
   const sanitizedInput = await schema.validate(inputs, { abortEarly: false });
