@@ -9,6 +9,7 @@ import About from "./About";
 import ProjectDetailsHeader from "./ProjectDetailsHeader";
 import Rounds from "./rounds/Rounds";
 import Stats from "./stats/Stats";
+import { Hypercerts } from "./hypercerts/Hypercerts";
 
 export default function Details({
   project,
@@ -89,6 +90,7 @@ export default function Details({
             >
               Rounds
             </Tab>
+            {!!project?.hypercertIds?.length && <Tab>Hypercerts</Tab>}
           </TabList>
           <TabPanels>
             <TabPanel>
@@ -104,6 +106,9 @@ export default function Details({
             </TabPanel>
             <TabPanel>
               <Rounds />
+            </TabPanel>
+            <TabPanel>
+              <Hypercerts project={project} />
             </TabPanel>
           </TabPanels>
         </Tabs>
