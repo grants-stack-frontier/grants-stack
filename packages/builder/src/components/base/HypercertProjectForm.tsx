@@ -198,7 +198,7 @@ function HypercertProjectForm({
     dispatch(
       metadataSaved({
         ...props.formMetaData,
-        hypercertId: hypercertId as string,
+        hypercertIds: [hypercertId] as [string],
         title: hypercertMetadata.name as string,
         description: hypercertMetadata.description as string,
         ipfsEvaluationUrl: ipfsEvaluationUrl as string,
@@ -213,7 +213,7 @@ function HypercertProjectForm({
       dispatch(
         metadataSaved({
           ...props.formMetaData,
-          hypercertId: hypercertIdFromQuery,
+          hypercertIds: [hypercertIdFromQuery],
         })
       );
       handleFetchHypercert(hypercertIdFromQuery);
@@ -245,12 +245,12 @@ function HypercertProjectForm({
           label="Hypercert ID"
           name="hypercertId"
           placeholder="What's the hypercert ID?"
-          value={props.formMetaData.hypercertId}
+          value={props.formMetaData.hypercertIds?.join(", ")}
           changeHandler={handleInput}
           required
           disabled
           feedback={
-            feedback.find((fb) => fb.title === "hypercertId") ?? {
+            feedback.find((fb) => fb.title === "hypercertIds") ?? {
               type: "none",
               message: "",
             }
@@ -293,7 +293,7 @@ function HypercertProjectForm({
           placeholder="IPFS Evaluation File"
           value={props.formMetaData.ipfsEvaluationUrl}
           changeHandler={handleInput}
-          required={false}
+          required
           disabled
           feedback={
             feedback.find((fb) => fb.title === "ipfsEvaluationUrl") ?? {
