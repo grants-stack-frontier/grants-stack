@@ -1,4 +1,5 @@
 import { Box } from "@chakra-ui/react";
+import { ShieldCheckIcon } from "@heroicons/react/20/solid";
 import { renderToHTML } from "common";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
@@ -74,6 +75,11 @@ export default function About({
     </>
   );
 
+  const ipfsEvaluationLink = project?.ipfsEvaluationUrl?.replace(
+    "ipfs://",
+    "https://ipfs.io/ipfs/"
+  );
+
   return (
     <div className="flex flex-1 flex-col md:flex-row">
       <div className="flex flex-1 flex-col w-full">
@@ -87,9 +93,25 @@ export default function About({
                 rel="noreferrer"
               >
                 <LinkIcon color={colors["secondary-text"]} />{" "}
-                <span className="ml-1">{project?.website}</span>
+                <span className="ml-1 truncate">{project?.website}</span>
               </a>
             </div>
+            {ipfsEvaluationLink !== project?.website && (
+              <div>
+                <a
+                  target="_blank"
+                  href={ipfsEvaluationLink}
+                  className="flex items-center mr-6 text-primary-background m-2 pb-1"
+                  rel="noreferrer"
+                >
+                  <ShieldCheckIcon
+                    width="16px"
+                    color={colors["secondary-text"]}
+                  />{" "}
+                  <span className="ml-1 truncate">{ipfsEvaluationLink}</span>
+                </a>
+              </div>
+            )}
             {project?.projectTwitter && (
               <div className="flex justify-start items-center m-2 pb-1">
                 <img

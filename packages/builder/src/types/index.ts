@@ -9,12 +9,14 @@ export type Images = {
 };
 
 export interface Metadata {
+  hypercertIds?: string[];
   protocol: number;
   pointer: string;
   id: string;
   title: string;
   description: string;
   website: string;
+  ipfsEvaluationUrl?: string;
   bannerImg?: string;
   logoImg?: string;
   projectTwitter?: string;
@@ -26,11 +28,13 @@ export interface Metadata {
 }
 
 export interface Project {
+  hypercertIds?: string[];
   lastUpdated: Number; // unix timestamp in milliseconds
   id: string;
   title: string;
   description: string;
   website: string;
+  ipfsEvaluationUrl?: string;
   bannerImg?: string;
   logoImg?: string;
   metaPtr: MetaPtr;
