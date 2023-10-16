@@ -148,8 +148,9 @@ function ProjectForm({
           label="Hypercert ID"
           name="hypercertid"
           placeholder="What's the hypercert ID?"
-          value={props.formMetaData.hypercertId}
+          value={props.formMetaData.hypercertIds?.join(", ")}
           changeHandler={handleInput}
+          disabled
           required={false}
           feedback={
             feedback.find((fb) => fb.title === "hypercertId") ?? {

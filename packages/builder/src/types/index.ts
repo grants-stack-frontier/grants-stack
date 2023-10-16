@@ -216,7 +216,7 @@ export type ProjectCredentials = {
 };
 
 export type FormInputs = {
-  hypercertId?: string;
+  hypercertIds?: string[];
   ipfsEvaluationUrl?: string;
   title?: string;
   description?: string;
