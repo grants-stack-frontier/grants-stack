@@ -82,7 +82,7 @@ export default function About({
 
   const ipfsEvaluationLink = project?.ipfsEvaluationUrl?.replace(
     "ipfs://",
-    "https://ipfs.io/ipfs/"
+    "https://nftstorage.link/ipfs/"
   );
 
   return (
