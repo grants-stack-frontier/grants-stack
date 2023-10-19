@@ -1,4 +1,5 @@
 import { fetchFromIPFS, PayoutToken, pinToIPFS } from "./utils";
+import { fetchHypercertMetadata } from "common/src/hypercert";
 import {
   AppStatus,
   GrantApplication,
@@ -197,6 +198,20 @@ export const getApplicationsByRoundId = async (
         ? metadata.application
         : metadata;
 
+      const projectMetadataFromApplication = await fetchFromIPFS(
+        metadata.application.project.metaPtr.pointer
+      );
+
+      const hypercerts = await Promise.all(
+        projectMetadataFromApplication.hypercertIds.map((hypercertId: string) =>
+          fetchHypercertMetadata(hypercertId, chainId)
+            .then((hypercert) =>
+              fetchFromIPFS(hypercert.uri.replace("ipfs://", ""))
+            )
+            .then((res) => ({ ...res, id: hypercertId }))
+        )
+      );
+
       grantApplications.push({
         ...application,
         status: projectStatus,
@@ -217,6 +232,7 @@ export const getApplicationsByRoundId = async (
             timestamp: new Date(Number(s.timestamp) * 1000),
           })
         ),
+        hypercerts,
       });
     }
 

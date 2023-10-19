@@ -787,6 +787,9 @@ export default function ViewApplicationPage() {
                       </div>
                     );
                   })}
+                {application?.hypercerts && (
+                  <HypercertsOverview hypercerts={application?.hypercerts} />
+                )}
 
                 {round !== undefined &&
                   application?.payoutStrategy?.strategyName ==
@@ -912,4 +915,35 @@ function redirectToViewApplicationPage(
   setTimeout(() => {
     navigate(`/round/${id}/application/${applicationId}`);
   }, waitSeconds);
+}
+
+function HypercertsOverview({
+  hypercerts,
+}: {
+  hypercerts?: { image: string; id: string }[];
+}) {
+  if (!hypercerts) {
+    return null;
+  }
+
+  return (
+    <div className="mt-8">
+      <h1 className="text-md font-thin text-black mb-8">Hypercerts</h1>
+      <div className="flex gap-x-2 gap-y-2 flex-wrap">
+        {hypercerts.map((h) => (
+          <a
+            target="_blank"
+            rel="noopener noreferrer"
+            href={`https://hypercerts.org/app/view#claimId=${h.id}`}
+          >
+            <img
+              src={h.image}
+              alt="Hypercert"
+              style={{ height: 400, width: 320 }}
+            />
+          </a>
+        ))}
+      </div>
+    </div>
+  );
 }
