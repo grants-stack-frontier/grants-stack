@@ -21,6 +21,7 @@ import { useRoundById } from "../../context/RoundContext";
 import {
   CartProject,
   GrantApplicationFormAnswer,
+  HypercertMetadata,
   Project,
   ProjectCredentials,
   ProjectMetadata,
@@ -166,6 +167,9 @@ export default function ViewProjectDetails() {
                     />
                     <ApplicationFormAnswers
                       answers={projectToRender.grantApplicationFormAnswers}
+                    />
+                    <HypercertsOverview
+                      hypercerts={projectToRender.projectMetadata.hypercerts}
                     />
                   </div>
                 </div>
@@ -671,4 +675,35 @@ async function isVerified(
     vcIssuedToAtLeastOneProjectOwner
     ? VerifiedCredentialState.VALID
     : VerifiedCredentialState.INVALID;
+}
+
+function HypercertsOverview({
+  hypercerts,
+}: {
+  hypercerts?: HypercertMetadata[];
+}) {
+  if (!hypercerts) {
+    return null;
+  }
+
+  return (
+    <div className="mt-8">
+      <h1 className="text-2xl font-thin text-black mb-8">Hypercerts</h1>
+      <div className="flex gap-x-2 gap-y-2 flex-wrap">
+        {hypercerts.map((h) => (
+          <a
+            target="_blank"
+            rel="noopener noreferrer"
+            href={`https://hypercerts.org/app/view#claimId=${h.id}`}
+          >
+            <img
+              src={h.image}
+              alt="Hypercert"
+              style={{ height: 400, width: 320 }}
+            />
+          </a>
+        ))}
+      </div>
+    </div>
+  );
 }

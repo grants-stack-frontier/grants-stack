@@ -228,8 +228,7 @@ async function fetchMetadataAndMapProject(
   // new format: { signature: "...", application: { round, project, ... } }
   const application = applicationData.application || applicationData;
   const projectMetadataFromApplication = application.project;
-  let hypercertMetadata = {};
-  let hypercertId: string | undefined;
+  let hypercerts: object[] = [];
 
   if (hypercertRequired) {
     const metadata = await fetchFromIPFS(
@@ -240,18 +239,14 @@ async function fetchMetadataAndMapProject(
       throw new Error("Hypercert ID not found");
     }
 
-    hypercertId = metadata.hypercertId;
-    const hypercert = await fetchHypercertMetadata(
-      metadata.hypercertIds[0],
-      chainId
-    );
-
-    if (!hypercert) {
-      throw new Error("Hypercert not found");
-    }
-
-    hypercertMetadata = await fetchFromIPFS(
-      hypercert.uri.replace("ipfs://", "")
+    hypercerts = await Promise.all(
+      metadata.hypercertIds.map((hypercertId: string) =>
+        fetchHypercertMetadata(hypercertId, chainId)
+          .then((hypercert) =>
+            fetchFromIPFS(hypercert.uri.replace("ipfs://", ""))
+          )
+          .then((res) => ({ ...res, id: hypercertId }))
+      )
     );
   }
 
@@ -265,8 +260,7 @@ async function fetchMetadataAndMapProject(
     recipient: application.recipient,
     projectMetadata: {
       ...projectMetadataFromApplication,
-      hypercertId,
-      hypercertMetadata,
+      hypercerts,
       owners: projectOwners.map((address: string) => ({ address })),
     },
     status: ApplicationStatus.APPROVED,
