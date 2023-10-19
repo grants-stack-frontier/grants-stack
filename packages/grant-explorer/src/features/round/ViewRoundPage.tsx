@@ -411,7 +411,7 @@ function ProjectCard(props: {
       </Link>
       <CardFooter className="bg-white border-t">
         <CardContent className="p-4 text-xs flex items-center h-full">
-          {project.projectMetadata.hypercertId && (
+          {project.projectMetadata.hypercerts && (
             <div className="flex items-center">
               <img
                 alt="The hypercerts logo"
@@ -421,7 +421,7 @@ function ProjectCard(props: {
               <a
                 target="_blank"
                 rel="noopener noreferrer"
-                href={`https://hypercerts.org/app/view#claimId=${project.projectMetadata.hypercertId}`}
+                href={`https://hypercerts.org/`}
               >
                 Built with hypercerts
               </a>

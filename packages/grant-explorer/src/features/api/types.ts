@@ -167,6 +167,11 @@ interface ProjectOwner {
   address: string;
 }
 
+export interface HypercertMetadata {
+  id: string;
+  image: string;
+}
+
 export type ProjectMetadata = {
   title: string;
   description: string;
@@ -179,7 +184,7 @@ export type ProjectMetadata = {
   credentials?: ProjectCredentials;
   owners: ProjectOwner[];
   createdAt?: number;
-  hypercertId?: string;
+  hypercerts: HypercertMetadata[];
 };
 
 export type ProjectCredentials = {
