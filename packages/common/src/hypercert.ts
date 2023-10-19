@@ -1,11 +1,14 @@
-const getHypercertGraphUrl = (chainId: number) => {
+const getHypercertGraphUrl = (chainId: number | string) => {
+  console.log("chainId", chainId);
   switch (chainId) {
     case 5:
+    case "5":
       return "https://api.thegraph.com/subgraphs/name/hypercerts-admin/hypercerts-testnet";
     case 10:
+    case "10":
       return "https://api.thegraph.com/subgraphs/name/hypercerts-admin/hypercerts-optimism-mainnet";
     default:
-      return "";
+      throw new Error("unsupported chainId");
   }
 };
 
