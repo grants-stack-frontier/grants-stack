@@ -21,6 +21,7 @@ import PurpleNotificationBox from "../base/PurpleNotificationBox";
 import SwitchNetworkModal from "../base/SwitchNetworkModal";
 import VerificationForm from "../base/VerificationForm";
 import Cross from "../icons/Cross";
+import HypercertProjectForm from "../base/HypercertProjectForm";
 
 function EditProject() {
   const params = useParams();
@@ -158,6 +159,13 @@ function EditProject() {
   const currentForm = (status: ProjectFormStatus) => {
     switch (status) {
       case ProjectFormStatus.Metadata:
+        if (props.projectMetadata?.hypercertIds !== undefined) {
+          return (
+            <HypercertProjectForm
+              setVerifying={(verifyUpdate) => setFormStatus(verifyUpdate)}
+            />
+          );
+        }
         return (
           <ProjectForm
             setVerifying={(verifyUpdate) => setFormStatus(verifyUpdate)}

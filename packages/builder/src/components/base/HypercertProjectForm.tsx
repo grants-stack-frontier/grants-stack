@@ -63,12 +63,25 @@ function HypercertProjectForm({
 
   const handleInput = (e: ChangeHandlers) => {
     const { value } = e.target;
-    dispatch(
-      metadataSaved({
-        ...props.formMetaData,
-        [e.target.name]: value,
-      })
-    );
+
+    if (e.target.name === "hypercertIds") {
+      const uniqIds = Array.from(
+        new Set(value.split(",").map((id) => id.trim()))
+      );
+      dispatch(
+        metadataSaved({
+          ...props.formMetaData,
+          [e.target.name]: uniqIds,
+        })
+      );
+    } else {
+      dispatch(
+        metadataSaved({
+          ...props.formMetaData,
+          [e.target.name]: value,
+        })
+      );
+    }
   };
 
   const logoChangedHandler = (logo?: Blob) => {
@@ -156,7 +169,6 @@ function HypercertProjectForm({
     const hypercertMetadata = await pinataClient.fetchJson(
       hypercert.uri?.replace("ipfs://", "")!
     );
-    console.log(hypercertMetadata);
 
     const b64Identifier = "base64,";
     const contentType = hypercertMetadata.image.slice(
@@ -222,6 +234,8 @@ function HypercertProjectForm({
 
   useEffect(() => {}, []);
 
+  console.log("hypercertIds", props.formMetaData.hypercertIds);
+
   return (
     <div className="border-0 sm:border sm:border-solid border-tertiary-text rounded text-primary-text p-0 sm:p-4">
       <form onSubmit={(e) => e.preventDefault()}>
@@ -241,14 +255,15 @@ function HypercertProjectForm({
           />
         </div>
         <div className="border w-full mt-8" />
-        <TextInput
-          label="Hypercert ID"
-          name="hypercertId"
+        <TextArea
+          label="Hypercert IDs"
+          name="hypercertIds"
           placeholder="What's the hypercert ID?"
+          rows={8}
+          containerClass="w-full"
           value={props.formMetaData.hypercertIds?.join(", ")}
           changeHandler={handleInput}
           required
-          disabled
           feedback={
             feedback.find((fb) => fb.title === "hypercertIds") ?? {
               type: "none",
