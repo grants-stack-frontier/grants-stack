@@ -256,9 +256,9 @@ function HypercertProjectForm({
         </div>
         <div className="border w-full mt-8" />
         <TextArea
-          label="Hypercert IDs"
+          label="Hypercert IDs (comma separated)"
           name="hypercertIds"
-          placeholder="What's the hypercert ID?"
+          placeholder="Hypercert IDs (comma separated)"
           rows={8}
           containerClass="w-full"
           value={props.formMetaData.hypercertIds?.join(", ")}

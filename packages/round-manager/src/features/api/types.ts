@@ -334,6 +334,7 @@ export interface GrantApplication {
    * Created timestamp of a grant application
    */
   createdAt: string;
+  hypercerts?: { id: string; image: string }[];
 }
 
 export type AnswerBlock = {
