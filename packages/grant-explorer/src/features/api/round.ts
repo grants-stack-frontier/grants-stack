@@ -228,13 +228,13 @@ async function fetchMetadataAndMapProject(
       projectMetadataFromApplication.metaPtr.pointer
     );
 
-    if (!metadata.hypercertId) {
+    if (!metadata.hypercertIds) {
       throw new Error("Hypercert ID not found");
     }
 
     hypercertId = metadata.hypercertId;
     const hypercert = await fetchHypercertMetadata(
-      metadata.hypercertId,
+      metadata.hypercertIds[0],
       chainId
     );
 
