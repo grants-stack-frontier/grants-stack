@@ -144,21 +144,7 @@ function ProjectForm({
           />
         </div>
         <div className="border w-full mt-8" />
-        <TextInput
-          label="Hypercert ID"
-          name="hypercertid"
-          placeholder="What's the hypercert ID?"
-          value={props.formMetaData.hypercertIds?.join(", ")}
-          changeHandler={handleInput}
-          disabled
-          required={false}
-          feedback={
-            feedback.find((fb) => fb.title === "hypercertId") ?? {
-              type: "none",
-              message: "",
-            }
-          }
-        />
+
         <div className="border w-full mt-8" />
         <TextInput
           label="Project Name"

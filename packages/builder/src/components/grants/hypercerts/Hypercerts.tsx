@@ -43,7 +43,7 @@ function HypercertTile({
       target="_blank"
       rel="noreferrer"
     >
-      <img src={image} alt="Hypercert" />
+      <img src={image} alt="Hypercert" style={{ height: 400, width: 320 }} />
     </a>
   );
 }
