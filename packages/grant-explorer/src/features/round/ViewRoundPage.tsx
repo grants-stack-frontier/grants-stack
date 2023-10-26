@@ -40,6 +40,7 @@ import CartNotification from "../common/CartNotification";
 import { useCartStorage } from "../../store";
 import { useToken } from "wagmi";
 import { getAddress } from "viem";
+import { LinkIcon } from "@heroicons/react/24/solid";
 
 export default function ViewRound() {
   datadogLogs.logger.info("====> Route: /round/:chainId/:roundId");
@@ -362,6 +363,7 @@ function ProjectCard(props: {
   setShowCartNotification: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
   const { project, roundRoutePath } = props;
+  const numberOfHypercertsShown = 2;
   const projectRecipient =
     project.recipient.slice(0, 5) + "..." + project.recipient.slice(-4);
 
@@ -375,6 +377,8 @@ function ProjectCard(props: {
   const cartProject = project as CartProject;
   cartProject.roundId = props.roundId;
   cartProject.chainId = Number(props.chainId);
+
+  const hypercerts = project.projectMetadata.hypercerts;
 
   return (
     <BasicCard className="relative md:w-[296px]" data-testid="project-card">
@@ -410,21 +414,58 @@ function ProjectCard(props: {
         </CardContent>
       </Link>
       <CardFooter className="bg-white border-t">
-        <CardContent className="p-4 text-xs flex items-center h-full">
-          {project.projectMetadata.hypercerts && (
-            <div className="flex items-center">
+        <CardContent className="p-4 text-xs flex items-center h-full overflow-hidden">
+          {!!hypercerts.length && (
+            <div className="flex items-center w-full">
               <img
                 alt="The hypercerts logo"
                 src="https://site-assets.plasmic.app/e1dddbd0e6a7104aee374d7b1b47a04a.svg"
                 className="w-8 h-8 mr-2"
               />
-              <a
-                target="_blank"
-                rel="noopener noreferrer"
-                href={`https://hypercerts.org/`}
-              >
-                Built with hypercerts
-              </a>
+              <div className="flex flex-col overflow-hidden">
+                <div className="text-sm font-bold">
+                  <a href="https://hypercerts.org/docs/intro/" target="_blank">
+                    Project has {hypercerts.length} hypercert
+                    {hypercerts.length > 1 ? "s" : ""}
+                  </a>
+                </div>
+                {hypercerts
+                  .slice(0, numberOfHypercertsShown)
+                  .map((hypercert) => (
+                    <div
+                      key={hypercert.id}
+                      className="flex w-full items-center overflow-hidden"
+                    >
+                      <span className="truncate overflow-hidden text-sm flex items-center">
+                        <a
+                          className="truncate"
+                          target="_blank"
+                          href={`https://hypercerts.org/app/view#claimId=${hypercert.id}`}
+                        >
+                          {hypercert.name}
+                        </a>
+                      </span>
+                      <a
+                        target="_blank"
+                        href={
+                          hypercert.external_url.startsWith("ipfs://")
+                            ? hypercert.external_url.replace(
+                                "ipfs://",
+                                "https://nftstorage.link/ipfs/"
+                              )
+                            : hypercert.external_url
+                        }
+                      >
+                        <LinkIcon className="h-4 w-4 ml-2" />
+                      </a>
+                    </div>
+                  ))}
+                {hypercerts.length > numberOfHypercertsShown && (
+                  <div className="text-sm">
+                    And {hypercerts.length - numberOfHypercertsShown} more...
+                  </div>
+                )}
+              </div>
             </div>
           )}
           {props.isBeforeRoundEndDate && (

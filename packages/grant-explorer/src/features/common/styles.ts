@@ -56,7 +56,7 @@ export const CardFooter = tw.div`
   bottom-0
   inset-x-0
   bg-zinc-50
-  h-20
+  h-24
   w-full
 `;
 
