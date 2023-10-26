@@ -183,13 +183,14 @@ export const getApplicationsByRoundId = async (
       );
 
       const hypercerts = await Promise.all(
-        projectMetadataFromApplication.hypercertIds.map((hypercertId: string) =>
-          fetchHypercertMetadata(hypercertId, chainId)
-            .then((hypercert) =>
-              fetchFromIPFS(hypercert.uri.replace("ipfs://", ""))
-            )
-            .then((res) => ({ ...res, id: hypercertId }))
-        )
+        projectMetadataFromApplication.hypercertIds?.map(
+          (hypercertId: string) =>
+            fetchHypercertMetadata(hypercertId, chainId)
+              .then((hypercert) =>
+                fetchFromIPFS(hypercert.uri.replace("ipfs://", ""))
+              )
+              .then((res) => ({ ...res, id: hypercertId }))
+        ) || []
       );
 
       grantApplications.push({
