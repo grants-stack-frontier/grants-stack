@@ -4,8 +4,10 @@ import { PassportVerifier } from "@gitcoinco/passport-sdk-verifier";
 import {
   BoltIcon,
   GlobeAltIcon,
+  LinkIcon,
   ShieldCheckIcon,
 } from "@heroicons/react/24/solid";
+import { InformationCircleIcon } from "@heroicons/react/24/outline";
 import { Client } from "allo-indexer-client";
 import { formatDateWithOrdinal, renderToHTML } from "common";
 import { Button } from "common/src/styles";
@@ -688,20 +690,55 @@ function HypercertsOverview({
 
   return (
     <div className="mt-8">
-      <h1 className="text-2xl font-thin text-black mb-8">Hypercerts</h1>
+      <h1 className="text-2xl font-thin text-black mb-4 flex items-center">
+        Hypercerts
+        <a href="https://hypercerts.org/docs/intro/" target="_blank">
+          <InformationCircleIcon className="h-5 w-5 ml-2" />
+        </a>
+      </h1>
       <div className="flex gap-x-2 gap-y-2 flex-wrap">
         {hypercerts.map((h) => (
-          <a
-            target="_blank"
-            rel="noopener noreferrer"
-            href={`https://hypercerts.org/app/view#claimId=${h.id}`}
-          >
-            <img
-              src={h.image}
-              alt="Hypercert"
-              style={{ height: 400, width: 320 }}
-            />
-          </a>
+          <div>
+            <a
+              target="_blank"
+              rel="noopener noreferrer"
+              href={`https://hypercerts.org/app/view#claimId=${h.id}`}
+            >
+              <img
+                src={h.image}
+                alt="Hypercert"
+                style={{ height: 400, width: 320 }}
+              />
+            </a>
+            <div
+              key={h.id}
+              className="flex flex-col w-full items-center overflow-hidden mt-2 justify-center"
+            >
+              <span className="truncate overflow-hidden text-sm flex items-center">
+                <a
+                  className="truncate"
+                  target="_blank"
+                  href={`https://hypercerts.org/app/view#claimId=${h.id}`}
+                >
+                  {h.name}
+                </a>
+              </span>
+              <a
+                className="flex items-center"
+                target="_blank"
+                href={
+                  h.external_url.startsWith("ipfs://")
+                    ? h.external_url.replace(
+                        "ipfs://",
+                        "https://nftstorage.link/ipfs/"
+                      )
+                    : h.external_url
+                }
+              >
+                Verification data <LinkIcon className="h-4 w-4 ml-2" />
+              </a>
+            </div>
+          </div>
         ))}
       </div>
     </div>
