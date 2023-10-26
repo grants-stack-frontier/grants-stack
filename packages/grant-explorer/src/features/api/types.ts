@@ -184,6 +184,8 @@ interface ProjectOwner {
 export interface HypercertMetadata {
   id: string;
   image: string;
+  name: string;
+  external_url: string;
 }
 
 export type ProjectMetadata = {
