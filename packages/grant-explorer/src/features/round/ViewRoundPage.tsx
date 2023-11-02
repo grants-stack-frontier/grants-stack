@@ -471,10 +471,7 @@ function ProjectCard(props: {
                 />
                 <div className="flex flex-col overflow-hidden">
                   <div className="text-sm font-bold">
-                    <a
-                      href="https://hypercerts.org/docs/intro/"
-                      target="_blank"
-                    >
+                    <a href="https://hypercerts.org/docs/intro/" target="_blank">
                       Project has {hypercerts.length} hypercert
                       {hypercerts.length > 1 ? "s" : ""}
                     </a>
@@ -486,23 +483,23 @@ function ProjectCard(props: {
                         key={hypercert.id}
                         className="flex w-full items-center overflow-hidden"
                       >
-                        <span className="truncate overflow-hidden text-sm flex items-center">
-                          <a
-                            className="truncate"
-                            target="_blank"
-                            href={`https://hypercerts.org/app/view#claimId=${hypercert.id}`}
-                          >
-                            {hypercert.name}
-                          </a>
-                        </span>
+                      <span className="truncate overflow-hidden text-sm flex items-center">
+                        <a
+                          className="truncate"
+                          target="_blank"
+                          href={`https://hypercerts.org/app/view#claimId=${hypercert.id}`}
+                        >
+                          {hypercert.name}
+                        </a>
+                      </span>
                         <a
                           target="_blank"
                           href={
-                            hypercert.external_url.startsWith("ipfs://")
+                            hypercert.external_url?.startsWith("ipfs://")
                               ? hypercert.external_url.replace(
-                                  "ipfs://",
-                                  "https://nftstorage.link/ipfs/"
-                                )
+                                "ipfs://",
+                                "https://nftstorage.link/ipfs/"
+                              )
                               : hypercert.external_url
                           }
                         >

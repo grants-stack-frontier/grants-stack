@@ -727,7 +727,7 @@ function HypercertsOverview({
                 className="flex items-center"
                 target="_blank"
                 href={
-                  h.external_url.startsWith("ipfs://")
+                  h.external_url?.startsWith("ipfs://")
                     ? h.external_url.replace(
                         "ipfs://",
                         "https://nftstorage.link/ipfs/"
