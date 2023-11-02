@@ -448,7 +448,7 @@ function ProjectCard(props: {
                       <a
                         target="_blank"
                         href={
-                          hypercert.external_url.startsWith("ipfs://")
+                          hypercert.external_url?.startsWith("ipfs://")
                             ? hypercert.external_url.replace(
                                 "ipfs://",
                                 "https://nftstorage.link/ipfs/"
