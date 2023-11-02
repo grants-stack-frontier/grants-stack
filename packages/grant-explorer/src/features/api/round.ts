@@ -235,7 +235,7 @@ async function fetchMetadataAndMapProject(
       projectMetadataFromApplication.metaPtr.pointer
     );
 
-    if (!metadata.hypercertIds) {
+    if (metadata.hypercertIds) {
       hypercerts = await Promise.all(
         metadata.hypercertIds.map((hypercertId: string) =>
           fetchHypercertMetadata(hypercertId, chainId)
@@ -246,7 +246,7 @@ async function fetchMetadataAndMapProject(
         )
       );
     } else {
-      console.log("Hypercert ID not found");
+      console.log("Hypercert ID not found for project", project);
     }
   }
 
