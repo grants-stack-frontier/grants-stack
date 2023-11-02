@@ -236,18 +236,18 @@ async function fetchMetadataAndMapProject(
     );
 
     if (!metadata.hypercertIds) {
-      throw new Error("Hypercert ID not found");
+      hypercerts = await Promise.all(
+        metadata.hypercertIds.map((hypercertId: string) =>
+          fetchHypercertMetadata(hypercertId, chainId)
+            .then((hypercert) =>
+              fetchFromIPFS(hypercert.uri.replace("ipfs://", ""))
+            )
+            .then((res) => ({ ...res, id: hypercertId }))
+        )
+      );
+    } else {
+      console.log("Hypercert ID not found");
     }
-
-    hypercerts = await Promise.all(
-      metadata.hypercertIds.map((hypercertId: string) =>
-        fetchHypercertMetadata(hypercertId, chainId)
-          .then((hypercert) =>
-            fetchFromIPFS(hypercert.uri.replace("ipfs://", ""))
-          )
-          .then((res) => ({ ...res, id: hypercertId }))
-      )
-    );
   }
 
   const projectRegistryId = `0x${projectMetadataFromApplication.id}`;
